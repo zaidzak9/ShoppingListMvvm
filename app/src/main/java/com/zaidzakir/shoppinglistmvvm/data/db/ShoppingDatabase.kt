@@ -1,9 +1,10 @@
-package com.zaidzakir.shoppinglistmvvm
+package com.zaidzakir.shoppinglistmvvm.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.zaidzakir.shoppinglistmvvm.data.db.entities.ShoppingItem
 
 /**
  *Created by Zaid Zakir
@@ -14,17 +15,22 @@ import androidx.room.RoomDatabase
     version = 1
 )
 abstract class ShoppingDatabase:RoomDatabase() {
-    abstract fun getShoppingDao():ShoppingDao
+    abstract fun getShoppingDao(): ShoppingDao
 
     //creating a single instance
     companion object{
         //only one thread at a time can write to this instance
         @Volatile
-         private var instance:ShoppingDatabase?=null
+         private var instance: ShoppingDatabase?=null
         private val LOCK = Any()
 
-        operator fun invoke(context: Context) = instance ?: synchronized(LOCK){
-            instance ?: createDatabase(context).also { instance = it }
+        operator fun invoke(context: Context) = instance
+            ?: synchronized(LOCK){
+            instance
+                ?: createDatabase(
+                    context
+                )
+                    .also { instance = it }
         }
 
         private fun createDatabase(context:Context)=

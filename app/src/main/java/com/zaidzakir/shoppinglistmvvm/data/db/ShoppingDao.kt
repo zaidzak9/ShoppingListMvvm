@@ -1,7 +1,8 @@
-package com.zaidzakir.shoppinglistmvvm
+package com.zaidzakir.shoppinglistmvvm.data.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import com.zaidzakir.shoppinglistmvvm.data.db.entities.ShoppingItem
 
 /**
  *Created by Zaid Zakir
