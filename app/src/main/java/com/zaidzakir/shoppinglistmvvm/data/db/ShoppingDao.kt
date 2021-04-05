@@ -9,7 +9,8 @@ import com.zaidzakir.shoppinglistmvvm.data.db.entities.ShoppingItem
  */
 @Dao
 interface ShoppingDao {
-    //suspend function to make it eligible with coroutines
+    //doesn't allow to do in main thread,suspend function to make it eligible with coroutines
+    //OnConflictStrategy.REPLACE replaces any items that is same which is edited
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsert(item: ShoppingItem)
 

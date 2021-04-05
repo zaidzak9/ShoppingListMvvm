@@ -15,20 +15,12 @@ import org.kodein.di.generic.singleton
 /**
  *Created by Zaid Zakir
  */
-class ShoppingApplication : Application(),KodeinAware{
+class ShoppingApplication : Application(), KodeinAware {
 
     override val kodein: Kodein = Kodein.lazy {
         import(androidXModule(this@ShoppingApplication))
         bind() from singleton { ShoppingDatabase(instance()) }
-        bind() from singleton {
-            ShoppingRepository(
-                instance()
-            )
-        }
-        bind() from provider {
-            ShoppingViewModelFactory(
-                instance()
-            )
-        }
+        bind() from singleton { ShoppingRepository(instance()) }
+        bind() from provider { ShoppingViewModelFactory(instance()) }
     }
 }
